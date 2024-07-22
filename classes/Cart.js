@@ -1,33 +1,28 @@
-const Product = require("./Product")
+const Product = require("./Product");
 
 class Cart {
-    constructor(products, total) {
-        this.products = [];
-        this.total = 0
-    }
+  constructor(products, total) {
+    this.products = [];
+    this.total = 0;
+  }
 
-    addProduct(product) {
-            if(product instanceof Product) {       
-            //console.log("this is product " + product.name)
-            this.products.push(product.name) 
-            this.total += 1    
-        } else throw new Error ("ERROR")
-        
-    }
+  addProduct(product) {
+    if (product instanceof Product) {
+      this.products.push(product);
+      this.total += product.price;
+    } else throw new Error("ERROR");
+  }
 
-    removeProduct(product) {
-        if(product instanceof Product) {
-            let index = this.products.indexOf(product.name)
-            this.products.splice(index,1)
-            this.total -= 1
-        }
-    }
+  removeProduct(i) {
+    let currentProduct = this.products[i];
+    this.products.splice(i, 1);
+    this.total -= currentProduct.price;
+  }
 }
 
-const prod1 = new Product("Bag", 10, "leather bag")
-console.log(prod1)
-const cart1 = new Cart()
-cart1.addProduct(prod1)
-console.log(cart1.products)
+const prod1 = new Product("Bag", 10, "leather bag");
+const cart1 = new Cart();
+cart1.addProduct(prod1);
+cart1.removeProduct(0);
 
 module.exports = Cart;

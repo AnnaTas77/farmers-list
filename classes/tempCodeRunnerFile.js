@@ -1,1 +1,1 @@
-console.log("HERE: ", cart1.products);
+    console.log("Current product: ", currentProduct);
